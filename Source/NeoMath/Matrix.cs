@@ -43,15 +43,49 @@ public class Matrix
         return res;
     }
 
+    public static bool operator ==(Matrix a, Matrix b)
+    {
+        if (a.Rows != b.Rows || a.Columns != b.Columns) return false;
+
+        for (int row = 0; row < a.Rows; row++)
+        {
+            for (int col = 0; col < a.Columns; col++)
+            {
+                if (a.Value[row, col] != b.Value[row, col]) return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static bool operator !=(Matrix a, Matrix b) => !(a == b);
+
     public static Matrix operator +(Matrix a, Matrix b) => OprWithMat(a, b, (x, y) => x + y);
 
     public static Matrix operator -(Matrix a, Matrix b) => OprWithMat(a, b, (x, y) => x - y);
+
+    public static Matrix operator %(Matrix a, double b) => OprWithNum(a, x => x % b);
 
     public static Matrix operator *(Matrix a, double b) => OprWithNum(a, x => x * b);
 
     public static Matrix operator *(double b, Matrix a) => OprWithNum(a, x => x * b);
 
-    public static Matrix operator %(Matrix a, double b) => OprWithNum(a, x => x % b);
+
+    public static Matrix operator *(Matrix a, Matrix b)
+    {
+        Matrix c = new Matrix(a.Rows, b.Columns);
+
+        for (int row = 0; row < c.Rows; row++)
+        {
+            for (int col = 0; col < c.Columns; col++)
+            {
+                c.Value[row, col] = 0;
+
+                for (int i = 0; i < a.Columns; i++) c.Value[row, col] += a.Value[row, i] * b.Value[i, col];
+            }
+        }
+        return c;
+    }
 
     private static Matrix OprWithNum (Matrix a, Func<double, double> func)
     {
