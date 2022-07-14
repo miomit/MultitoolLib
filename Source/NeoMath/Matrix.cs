@@ -43,66 +43,37 @@ public class Matrix
         return res;
     }
 
-    public static Matrix operator +(Matrix a, Matrix b)
+    public static Matrix operator +(Matrix a, Matrix b) => OprWithMat(a, b, (x, y) => x + y);
+
+    public static Matrix operator -(Matrix a, Matrix b) => OprWithMat(a, b, (x, y) => x - y);
+
+    public static Matrix operator *(Matrix a, double b) => OprWithNum(a, x => x * b);
+
+    public static Matrix operator *(double b, Matrix a) => OprWithNum(a, x => x * b);
+
+    public static Matrix operator %(Matrix a, double b) => OprWithNum(a, x => x % b);
+
+    private static Matrix OprWithNum (Matrix a, Func<double, double> func)
     {
         Matrix c = new Matrix(a.Rows, a.Columns);
         for (int row = 0; row < c.Rows; row++)
         {
             for (int col = 0; col < c.Columns; col++)
             {
-                c.Value[row, col] = a.Value[row, col] + b.Value[row, col];
+                c.Value[row, col] = func(a.Value[row, col]);
             }
         }
         return c;
     }
 
-    public static Matrix operator -(Matrix a, Matrix b)
+    private static Matrix OprWithMat (Matrix a, Matrix b, Func<double, double, double> func)
     {
         Matrix c = new Matrix(a.Rows, a.Columns);
         for (int row = 0; row < c.Rows; row++)
         {
             for (int col = 0; col < c.Columns; col++)
             {
-                c.Value[row, col] = a.Value[row, col] - b.Value[row, col];
-            }
-        }
-        return c;
-    }
-
-    public static Matrix operator *(Matrix a, double b)
-    {
-        Matrix c = new Matrix(a.Rows, a.Columns);
-        for (int row = 0; row < c.Rows; row++)
-        {
-            for (int col = 0; col < c.Columns; col++)
-            {
-                c.Value[row, col] = a.Value[row, col] * b;
-            }
-        }
-        return c;
-    }
-
-    public static Matrix operator *(double b, Matrix a)
-    {
-        Matrix c = new Matrix(a.Rows, a.Columns);
-        for (int row = 0; row < c.Rows; row++)
-        {
-            for (int col = 0; col < c.Columns; col++)
-            {
-                c.Value[row, col] = a.Value[row, col] * b;
-            }
-        }
-        return c;
-    }
-
-    public static Matrix operator %(Matrix a, double b)
-    {
-        Matrix c = new Matrix(a.Rows, a.Columns);
-        for (int row = 0; row < c.Rows; row++)
-        {
-            for (int col = 0; col < c.Columns; col++)
-            {
-                c.Value[row, col] = a.Value[row, col] % b;
+                c.Value[row, col] = func(a.Value[row, col], b.Value[row, col]);
             }
         }
         return c;
