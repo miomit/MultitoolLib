@@ -43,22 +43,13 @@ public class Matrix
         return res;
     }
 
-    public static bool operator ==(Matrix a, Matrix b)
-    {
-        if (a.Rows != b.Rows || a.Columns != b.Columns) return false;
-
-        for (int row = 0; row < a.Rows; row++)
-        {
-            for (int col = 0; col < a.Columns; col++)
-            {
-                if (a.Value[row, col] != b.Value[row, col]) return false;
-            }
-        }
-
-        return true;
-    }
+    public static bool operator ==(Matrix a, Matrix b) => BoolOprWithMat(a, b, (x, y) => x != y);
 
     public static bool operator !=(Matrix a, Matrix b) => !(a == b);
+
+    public static bool operator <(Matrix a, Matrix b) => BoolOprWithMat(a, b, (x, y) => x > y);
+
+    public static bool operator >(Matrix a, Matrix b) => !(a < b);
 
     public static Matrix operator +(Matrix a, Matrix b) => OprWithMat(a, b, (x, y) => x + y);
 
@@ -111,5 +102,20 @@ public class Matrix
             }
         }
         return c;
+    }
+
+    private static bool BoolOprWithMat (Matrix a, Matrix b, Func<double, double, bool> func)
+    {
+        if (a.Rows != b.Rows || a.Columns != b.Columns) return false;
+
+        for (int row = 0; row < a.Rows; row++)
+        {
+            for (int col = 0; col < a.Columns; col++)
+            {
+                if (func(a.Value[row, col], b.Value[row, col])) return false;
+            }
+        }
+
+        return true;
     }
 }
