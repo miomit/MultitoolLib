@@ -52,8 +52,8 @@ public class MatrixTest
     [Fact]
     public void EqualsMatrix()
     {
-        Matrix a = new Matrix(new double[,] {{0, 1, 2, 3}, 
-                                             {0, 5, 3, 9}, 
+        Matrix a = new Matrix(new double[,] {{2, 1, 2, 3}, 
+                                             {1, 5, 3, 9}, 
                                              {3, 1, 0, 0}});
 
         Assert.True(a == a);
@@ -65,9 +65,9 @@ public class MatrixTest
     [Fact]
     public void TestBoolOprMore()
     {
-        Matrix a = new Matrix(new double[,] {{0, 1, 2, 3}, 
-                                             {0, 5, 3, 9}, 
-                                             {3, 1, 0, 0}});
+        Matrix a = new Matrix(new double[,] {{1, 1, 2, 3}, 
+                                             {2, 5, 3, 9}, 
+                                             {3, 1, 1, 2}});
 
         Assert.True(a * 2 > a);
         Assert.False(a > a);
@@ -77,9 +77,9 @@ public class MatrixTest
     [Fact]
     public void TestBoolOprLess()
     {
-        Matrix a = new Matrix(new double[,] {{0, 1, 2, 3}, 
-                                             {0, 5, 3, 9}, 
-                                             {3, 1, 0, 0}});
+        Matrix a = new Matrix(new double[,] {{2, 1, 2, 3}, 
+                                             {1, 5, 3, 9}, 
+                                             {3, 1, 2, 1}});
 
         Assert.True(a < a * 3);
         Assert.False(a < a);
@@ -89,8 +89,8 @@ public class MatrixTest
     [Fact]
     public void TestBoolOprMoreAndEqual()
     {
-        Matrix a = new Matrix(new double[,] {{0, 1, 2, 3}, 
-                                             {0, 5, 3, 9}, 
+        Matrix a = new Matrix(new double[,] {{2, 1, 2, 3}, 
+                                             {1, 5, 3, 9}, 
                                              {3, 1, 0, 0}});
 
         Assert.True(a * 2 >= a);
@@ -101,8 +101,8 @@ public class MatrixTest
     [Fact]
     public void TestBoolOprLessAndEqual()
     {
-        Matrix a = new Matrix(new double[,] {{0, 1, 2, 3}, 
-                                             {0, 5, 3, 9}, 
+        Matrix a = new Matrix(new double[,] {{1, 1, 2, 3}, 
+                                             {2, 5, 3, 9}, 
                                              {3, 1, 0, 0}});
 
         Assert.True(a <= a * 3);
