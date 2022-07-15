@@ -61,4 +61,52 @@ public class MatrixTest
 
         Assert.True(a != 2 * a);
     }
+
+    [Fact]
+    public void TestBoolOprMore()
+    {
+        Matrix a = new Matrix(new double[,] {{0, 1, 2, 3}, 
+                                             {0, 5, 3, 9}, 
+                                             {3, 1, 0, 0}});
+
+        Assert.True(a * 2 > a);
+        Assert.False(a > a);
+        Assert.False(a > a * 2);
+    }
+
+    [Fact]
+    public void TestBoolOprLess()
+    {
+        Matrix a = new Matrix(new double[,] {{0, 1, 2, 3}, 
+                                             {0, 5, 3, 9}, 
+                                             {3, 1, 0, 0}});
+
+        Assert.True(a < a * 3);
+        Assert.False(a < a);
+        Assert.False(a * 10 < a);
+    }
+
+    [Fact]
+    public void TestBoolOprMoreAndEqual()
+    {
+        Matrix a = new Matrix(new double[,] {{0, 1, 2, 3}, 
+                                             {0, 5, 3, 9}, 
+                                             {3, 1, 0, 0}});
+
+        Assert.True(a * 2 >= a);
+        Assert.True(a >= a);
+        Assert.False(a >= a * 2);
+    }
+
+    [Fact]
+    public void TestBoolOprLessAndEqual()
+    {
+        Matrix a = new Matrix(new double[,] {{0, 1, 2, 3}, 
+                                             {0, 5, 3, 9}, 
+                                             {3, 1, 0, 0}});
+
+        Assert.True(a <= a * 3);
+        Assert.True(a <= a);
+        Assert.False(a * 10 <= a);
+    }
 }
