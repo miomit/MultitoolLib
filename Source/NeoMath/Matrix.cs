@@ -49,11 +49,11 @@ public class Matrix
 
     public static bool operator <(Matrix a, Matrix b) => BoolOprWithMat(a, b, (x, y) => x >= y);
 
-    public static bool operator >(Matrix a, Matrix b) => !(a <= b);
+    public static bool operator >(Matrix a, Matrix b) => BoolOprWithMat(a, b, (x, y) => x <= y);
 
     public static bool operator <=(Matrix a, Matrix b) => BoolOprWithMat(a, b, (x, y) => x > y);
 
-    public static bool operator >=(Matrix a, Matrix b) => !(a < b);
+    public static bool operator >=(Matrix a, Matrix b) => BoolOprWithMat(a, b, (x, y) => x < y);
 
     public static Matrix operator +(Matrix a, Matrix b) => OprWithMat(a, b, (x, y) => x + y);
 
