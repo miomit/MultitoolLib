@@ -22,6 +22,34 @@ public class MatrixTest
     }
 
     [Fact]
+    public void MatrixTransposition()
+    {
+        Matrix a = new Matrix(new double[,] {{12, 4},
+                                             {-17, 29},
+                                             {-30, -36}});
+
+        Matrix b = new Matrix(new double[,] {{12, -17, -30},
+                                             {4, 29, -36}});
+
+        Assert.True(a.GetTransform() == b);
+    }
+
+    [Fact]
+    public void MatrixTransposition2()
+    {
+        Matrix a = new Matrix(new double[,] {{5, 8, 9, 2},
+                                             {6, 12, 11, 4},
+                                             {1, 0, 3, 1}});
+
+        Matrix b = new Matrix(new double[,] {{5, 6, 1},
+                                             {8, 12, 0},
+                                             {9, 11, 3},
+                                             {2, 4, 1}});
+
+        Assert.True(a.GetTransform() == b);
+    }
+
+    [Fact]
     public void EqualsMatrix()
     {
         Matrix a = new Matrix(new double[,] {{0, 1, 2, 3}, 
