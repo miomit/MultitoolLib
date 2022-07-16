@@ -64,6 +64,38 @@ public class MatrixTest
     }
 
     [Fact]
+    public void TestSetRowsVector()
+    {
+        Matrix a = new Matrix(new double[,] {{12, 4},
+                                             {-17, 29},
+                                             {-30, -36}});
+
+        Matrix b = new Matrix(new double[,] {{12, 4},
+                                             {-17, 29},
+                                             {1, 2}});
+
+        a.SetRowsVector(2, new double[] {1, 2});
+
+        Assert.True(a == b);
+    }
+
+    [Fact]
+    public void TestSetColumnsVector()
+    {
+        Matrix a = new Matrix(new double[,] {{12, 4},
+                                             {-17, 29},
+                                             {-30, -36}});
+
+        Matrix b = new Matrix(new double[,] {{12, 5},
+                                             {-17, 90},
+                                             {-30, 6}});
+
+        a.SetColumnsVector(1, new double[] {5, 90, 6});
+
+        Assert.True(a == b);
+    }
+
+    [Fact]
     public void MatrixTransposition()
     {
         Matrix a = new Matrix(new double[,] {{12, 4},
