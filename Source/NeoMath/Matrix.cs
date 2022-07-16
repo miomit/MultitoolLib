@@ -8,6 +8,8 @@ public class Matrix
 
     public double[] GetRowsVector(int row)
     {
+        if (row >= Rows || row < 0) MatrixException.LineDoesNotExist();
+
         double[] res = new double[Columns];
         for (int i = 0; i < Columns; i++) res[i] = Value[row, i];
         return res;
@@ -15,6 +17,7 @@ public class Matrix
 
     public double[] GetColumnsVector(int col)
     {
+        if (col >= Columns || col < 0) MatrixException.LineDoesNotExist(false);
         double[] res = new double[Rows];
         for (int i = 0; i < Rows; i++) res[i] = Value[i, col];
         return res;
@@ -22,11 +25,15 @@ public class Matrix
 
     public void SetRowsVector(int row, double[] rowsVector) 
     {
+        if (row >= Rows || row < 0) MatrixException.LineDoesNotExist();
+
         for (int i = 0; i < Columns; i++) Value[row, i] = rowsVector[i];
     }
 
     public void SetColumnsVector(int col, double[] columnsVector) 
     {
+        if (col >= Columns || col < 0) MatrixException.LineDoesNotExist(false);
+        
         for (int i = 0; i < Rows; i++) Value[i, col] = columnsVector[i];
     }
 
