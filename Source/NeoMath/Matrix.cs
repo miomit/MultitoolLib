@@ -20,6 +20,16 @@ public class Matrix
         return res;
     }
 
+    public void SetRowsVector(int row, double[] rowsVector) 
+    {
+        for (int i = 0; i < Columns; i++) Value[row, i] = rowsVector[i];
+    }
+
+    public void SetColumnsVector(int col, double[] columnsVector) 
+    {
+        for (int i = 0; i < Rows; i++) Value[i, col] = columnsVector[i];
+    }
+
     public Matrix(double[,] value)
     {
         Value = value;
