@@ -128,6 +128,8 @@ public class Matrix
 
     private static Matrix OprWithMat (Matrix a, Matrix b, Func<double, double, double> func)
     {
+        if (a.Rows != b.Rows || a.Columns != b.Columns) MatrixException.SizesDontMatch();
+        
         Matrix c = new Matrix(a.Rows, a.Columns);
         for (int row = 0; row < c.Rows; row++)
         {
@@ -141,7 +143,7 @@ public class Matrix
 
     private static bool BoolOprWithMat (Matrix a, Matrix b, Func<double, double, bool> func)
     {
-        if (a.Rows != b.Rows || a.Columns != b.Columns) return false;
+        if (a.Rows != b.Rows || a.Columns != b.Columns) MatrixException.SizesDontMatch();
 
         for (int row = 0; row < a.Rows; row++)
         {
