@@ -1,6 +1,7 @@
 using Xunit;
 
 using NeoMath;
+using System;
 
 namespace Test.NeoMath;
 
@@ -33,6 +34,9 @@ public class MatrixTest
 
         for (int i = 0; i < aRes.Length; i++) Assert.True(aRes[i] == aOtv[i]);
 
+        Assert.Throws<Exception>(() => a.GetRowsVector(a.Rows));
+        Assert.Throws<Exception>(() => a.GetRowsVector(-1));
+
         Matrix b = new Matrix(new double[,] {{12, -17, -30},
                                              {4, 29, -36}});
 
@@ -40,6 +44,9 @@ public class MatrixTest
         double[] bOtv = new double[] {12, -17, -30};
 
         for (int i = 0; i < bRes.Length; i++) Assert.True(bRes[i] == bOtv[i]);
+
+        Assert.Throws<Exception>(() => b.GetRowsVector(b.Rows + 1));
+        Assert.Throws<Exception>(() => b.GetRowsVector(-1));
     }
 
     [Fact]
@@ -52,6 +59,9 @@ public class MatrixTest
         double[] aRes = a.GetColumnsVector(1);
         double[] aOtv = new double[] {4, 29, -36};
 
+        Assert.Throws<Exception>(() => a.GetColumnsVector(a.Columns));
+        Assert.Throws<Exception>(() => a.GetColumnsVector(-1));
+
         for (int i = 0; i < aRes.Length; i++) Assert.True(aRes[i] == aOtv[i]);
 
         Matrix b = new Matrix(new double[,] {{12, -17, -30},
@@ -61,6 +71,9 @@ public class MatrixTest
         double[] bOtv = new double[] {12, 4};
 
         for (int i = 0; i < bRes.Length; i++) Assert.True(bRes[i] == bOtv[i]);
+
+        Assert.Throws<Exception>(() => b.GetColumnsVector(b.Columns + 1));
+        Assert.Throws<Exception>(() => b.GetColumnsVector(-1));
     }
 
     [Fact]
@@ -77,6 +90,9 @@ public class MatrixTest
         a.SetRowsVector(2, new double[] {1, 2});
 
         Assert.True(a == b);
+
+        Assert.Throws<Exception>(() => a.SetRowsVector(a.Rows, new double[] {1, 2}));
+        Assert.Throws<Exception>(() => a.SetRowsVector(-1, new double[] {1, 2}));
     }
 
     [Fact]
@@ -93,6 +109,9 @@ public class MatrixTest
         a.SetColumnsVector(1, new double[] {5, 90, 6});
 
         Assert.True(a == b);
+
+        Assert.Throws<Exception>(() => a.SetColumnsVector(a.Columns, new double[] {1, 2}));
+        Assert.Throws<Exception>(() => a.SetColumnsVector(-1, new double[] {1, 2}));
     }
 
     [Fact]
