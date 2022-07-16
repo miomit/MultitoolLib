@@ -8,6 +8,49 @@ namespace Test.NeoMath;
 public class MatrixTest
 {
     [Fact]
+    public void TestAdd()
+    {
+        Matrix a = new Matrix(new double[,] {{2, 0},
+                                             {1, -1}});
+
+        Matrix b = new Matrix(new double[,] {{1, 0},
+                                             {0, -1}});
+
+        Matrix c = new Matrix(new double[,] {{3, 0},
+                                             {1, -2}});
+
+        Assert.True(a + b == c);
+    }
+
+    [Fact]
+    public void TestSub()
+    {
+        Matrix a = new Matrix(new double[,] {{2, 0},
+                                             {1, -1}});
+
+        Matrix b = new Matrix(new double[,] {{1, 0},
+                                             {0, -1}});
+
+        Matrix c = new Matrix(new double[,] {{1, 0},
+                                             {1, 0}});
+
+        Assert.True(a - b == c);
+    }
+
+    [Fact]
+    public void AddandSubWithDifferentSizes()
+    {
+        Matrix a = new Matrix(new double[,] {{2, 0},
+                                             {1, -1}});
+
+        Matrix b = new Matrix(new double[,] {{1, 0, -2},
+                                             {0, -1, 1}});
+
+        Assert.Throws<Exception>(() => a + b);
+        Assert.Throws<Exception>(() => a - b);
+    }
+
+    [Fact]
     public void SimpleMatrixMultiplication()
     {
         Matrix a = new Matrix(new double[,] {{2, 0},
