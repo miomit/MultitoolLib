@@ -51,6 +51,19 @@ public class Matrix
                 Value[i, j] = 0;
     }
 
+    public void Input()
+    {
+       for (int row = 0; row < Rows; row++)
+       {
+            string[] vec = new string[Columns];
+            vec = Console.ReadLine().Replace("  ", " ").Split();
+            for (int col = 0; col < Columns; col++)
+            {
+                Value[row, col] = Convert.ToDouble(vec[col]);
+            }
+       } 
+    }
+
     public Matrix GetTransform()
     {
         Matrix res = new Matrix(Columns, Rows);
