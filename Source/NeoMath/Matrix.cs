@@ -45,6 +45,10 @@ public class Matrix
     public Matrix(int rows, int columns)
     {
         Value = new double[rows, columns];
+
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < columns; j++)
+                Value[i, j] = 0;
     }
 
     public Matrix GetTransform()
