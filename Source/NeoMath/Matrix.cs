@@ -6,6 +6,20 @@ public class Matrix
     public int Rows => Value.GetUpperBound(0) + 1;
     public int Columns => Value.Length / Rows;
 
+    public double[] GetRowsVector(int row)
+    {
+        double[] res = new double[Columns];
+        for (int i = 0; i < Columns; i++) res[i] = Value[row, i];
+        return res;
+    }
+
+    public double[] GetColumnsVector(int col)
+    {
+        double[] res = new double[Rows];
+        for (int i = 0; i < Rows; i++) res[i] = Value[i, col];
+        return res;
+    }
+
     public Matrix(double[,] value)
     {
         Value = value;
