@@ -99,6 +99,8 @@ public class Matrix
 
     public static Matrix operator *(Matrix a, Matrix b)
     {
+        if (a.Columns != b.Rows) MatrixException.CannotMul();
+        
         Matrix c = new Matrix(a.Rows, b.Columns);
 
         for (int row = 0; row < c.Rows; row++)
@@ -129,7 +131,7 @@ public class Matrix
     private static Matrix OprWithMat (Matrix a, Matrix b, Func<double, double, double> func)
     {
         if (a.Rows != b.Rows || a.Columns != b.Columns) MatrixException.SizesDontMatch();
-        
+
         Matrix c = new Matrix(a.Rows, a.Columns);
         for (int row = 0; row < c.Rows; row++)
         {
