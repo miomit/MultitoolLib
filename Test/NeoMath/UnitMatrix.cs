@@ -66,6 +66,19 @@ public class MatrixTest
     }
 
     [Fact]
+    public void TestCannnotMul()
+    {
+        Matrix a = new Matrix(new double[,] {{2, 0},
+                                             {1, -1}});
+
+        Matrix b = new Matrix(new double[,] {{1, 0, -2},
+                                             {1, 0, -2},
+                                             {0, -1, 1}});
+
+        Assert.Throws<Exception>(() => a * b);
+    }
+
+    [Fact]
     public void TestGetRowsVector()
     {
         Matrix a = new Matrix(new double[,] {{12, 4},
