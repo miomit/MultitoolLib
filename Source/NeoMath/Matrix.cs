@@ -56,7 +56,7 @@ public class Matrix
        for (int row = 0; row < Rows; row++)
        {
             string[] vec = new string[Columns];
-            vec = Console.ReadLine().Replace("  ", " ").Split();
+            vec = Console.ReadLine().Split(' ', System.StringSplitOptions.RemoveEmptyEntries);
             for (int col = 0; col < Columns; col++)
             {
                 Value[row, col] = Convert.ToDouble(vec[col]);
