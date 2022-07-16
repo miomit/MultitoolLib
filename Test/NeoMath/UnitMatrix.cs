@@ -22,6 +22,48 @@ public class MatrixTest
     }
 
     [Fact]
+    public void TestGetRowsVector()
+    {
+        Matrix a = new Matrix(new double[,] {{12, 4},
+                                             {-17, 29},
+                                             {-30, -36}});
+
+        double[] aRes = a.GetRowsVector(1);
+        double[] aOtv = new double[] {-17, 29};
+
+        for (int i = 0; i < aRes.Length; i++) Assert.True(aRes[i] == aOtv[i]);
+
+        Matrix b = new Matrix(new double[,] {{12, -17, -30},
+                                             {4, 29, -36}});
+
+        double[] bRes = b.GetRowsVector(0);
+        double[] bOtv = new double[] {12, -17, -30};
+
+        for (int i = 0; i < bRes.Length; i++) Assert.True(bRes[i] == bOtv[i]);
+    }
+
+    [Fact]
+    public void TestGetColumnsVector()
+    {
+        Matrix a = new Matrix(new double[,] {{12, 4},
+                                             {-17, 29},
+                                             {-30, -36}});
+
+        double[] aRes = a.GetColumnsVector(1);
+        double[] aOtv = new double[] {4, 29, -36};
+
+        for (int i = 0; i < aRes.Length; i++) Assert.True(aRes[i] == aOtv[i]);
+
+        Matrix b = new Matrix(new double[,] {{12, -17, -30},
+                                             {4, 29, -36}});
+
+        double[] bRes = b.GetColumnsVector(0);
+        double[] bOtv = new double[] {12, 4};
+
+        for (int i = 0; i < bRes.Length; i++) Assert.True(bRes[i] == bOtv[i]);
+    }
+
+    [Fact]
     public void MatrixTransposition()
     {
         Matrix a = new Matrix(new double[,] {{12, 4},
