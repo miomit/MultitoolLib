@@ -42,6 +42,8 @@ public class Matrix
         Value = value;
     }
 
+    public Matrix(int size) : this(size, size) { }
+
     public Matrix(int rows, int columns)
     {
         Value = new double[rows, columns];
@@ -113,7 +115,6 @@ public class Matrix
     public static Matrix operator *(Matrix a, double b) => OprWithNum(a, x => x * b);
 
     public static Matrix operator *(double b, Matrix a) => OprWithNum(a, x => x * b);
-
 
     public static Matrix operator *(Matrix a, Matrix b)
     {
