@@ -199,6 +199,64 @@ public class MatrixTest
     }
 
     [Fact]
+    public void TestSwapRows()
+    {
+        Matrix a = new Matrix(new double[,] {{12, 4},
+                                             {-17, 29},
+                                             {-30, -36}});
+        
+        Matrix resA = new Matrix(new double[,] {{-30, -36},
+                                               {-17, 29},
+                                               {12, 4}});
+
+        a.SwapRows(0, 2);
+
+        Assert.True(a == resA);
+
+        Matrix b = new Matrix(new double[,] {{5, 6, 1},
+                                             {8, 12, 0},
+                                             {9, 11, 3},
+                                             {2, 4, 1}});
+
+        Matrix resB = new Matrix(new double[,] {{5, 6, 1},
+                                                {9, 11, 3},
+                                                {8, 12, 0},
+                                                {2, 4, 1}});
+
+        b.SwapRows(1, 2);
+
+        Assert.True(b == resB);
+    }
+
+    [Fact]
+    public void TestSwapColumns()
+    {
+        Matrix a = new Matrix(new double[,] {{2, 1, 2, 3}, 
+                                             {1, 5, 3, 9}, 
+                                             {3, 1, 0, 0}});
+
+        Matrix resA = new Matrix(new double[,] {{3, 1, 2, 2}, 
+                                                {9, 5, 3, 1}, 
+                                                {0, 1, 0, 3}});
+
+        a.SwapColumns(0, 3);
+
+        Assert.True(a == resA);
+
+        Matrix b = new Matrix(new double[,] {{12, -17, -30},
+                                             {4, 29, -36}});
+
+        Matrix resB = new Matrix(new double[,] {{12, -30, -17},
+                                                {4, -36, 29}});
+
+        b.SwapColumns(1, 2);
+
+        Assert.True(b == resB);
+
+        //TODO add an exception check
+    }
+
+    [Fact]
     public void EqualsMatrix()
     {
         Matrix a = new Matrix(new double[,] {{2, 1, 2, 3}, 
