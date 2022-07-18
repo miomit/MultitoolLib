@@ -80,6 +80,16 @@ public class Matrix
         return res;
     }
 
+    public void SwapRows(int rowA, int rowB)
+    {
+        for (int col = 0; col < Columns; col++) Algorithms.Std.Swap<double>(ref Value[rowA, col], ref Value[rowB, col]);
+    }
+
+    public void SwapColumns(int colA, int colB)
+    {
+        for (int row = 0; row < Rows; row++) Algorithms.Std.Swap<double>(ref Value[row, colA], ref Value[row, colB]);
+    }
+
     public override string ToString()
     {
         string res = "";
