@@ -1,3 +1,5 @@
+using Algorithms;
+
 namespace NeoMath;
 
 public class Matrix
@@ -88,6 +90,28 @@ public class Matrix
     public void SwapColumns(int colA, int colB)
     {
         for (int row = 0; row < Rows; row++) Algorithms.Std.Swap<double>(ref Value[row, colA], ref Value[row, colB]);
+    }
+
+    public void Step(bool isUpperTriangular = true, Matrix united = null)
+    {
+        //TODO lower triangular
+        int row = 0;
+        for (int col = 0; col < Columns; col++)
+        {
+            if (row == Rows - 1) break;
+            var id = Std.GetIdByMinElem<double>(GetColumnsVector(col)[row..Rows]);
+
+            if (id is null) { row++; continue; }
+
+            if (row != id) SwapRows(row, id ?? 0);
+
+            for (int r = row + 1; r < Rows; r++)
+            {
+                //Todo Tomorrow o_OzzZZZZ
+            }
+            
+            row++;
+        }
     }
 
     public override string ToString()
