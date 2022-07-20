@@ -24,5 +24,9 @@ public class StdTest
         int resC = 0;
 
         Assert.True(Std.GetIdByMinElem<double>(c) == resC);
+
+        double[] d = new double[] {0d, 0d, 0d, 0d};
+
+        Assert.True(Std.GetIdByMinElem<double>(d, true) is null);
     }
 }
