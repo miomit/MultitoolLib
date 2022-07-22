@@ -92,14 +92,14 @@ public class Matrix
         for (int row = 0; row < Rows; row++) Algorithms.Std.Swap<double>(ref Value[row, colA], ref Value[row, colB]);
     }
 
-    public void Step(bool isUpperTriangular = true, Matrix united = null)
+    public Matrix Step(bool isUpperTriangular = true, Matrix united = null)
     {
         //TODO lower triangular
         int row = 0;
         for (int col = 0; col < Columns; col++)
         {
             if (row == Rows - 1) break;
-            var id = Std.GetIdByMinElem<double>(GetColumnsVector(col)[row..Rows]);
+            var id = Std.GetIdByMinElem<double>(GetColumnsVector(col)[row..Rows], true);
 
             if (id is null) { row++; continue; }
 
@@ -107,11 +107,17 @@ public class Matrix
 
             for (int r = row + 1; r < Rows; r++)
             {
-                //Todo Tomorrow o_OzzZZZZ
+                if (Value[r, col] == 0d) continue;
+
+                var k = Value[r, col] / Value[row, col];
+
+                for (int c = col; c < Columns; c++) Value[r, c] = Value[r, c] - Value[row, c] * k;
             }
             
             row++;
         }
+
+        return this;
     }
 
     public override string ToString()
