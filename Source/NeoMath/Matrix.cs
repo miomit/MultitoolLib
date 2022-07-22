@@ -94,34 +94,80 @@ public class Matrix
 
     public Matrix Step(bool isUpperTriangular = true, Matrix united = null)
     {
-        //TODO lower triangular
-        int row = 0;
-        for (int col = 0; col < Columns; col++)
-        {
-            if (row == Rows - 1) break;
+        if (united is not null) 
+            if (united.Rows != Rows && united.Columns != Columns) 
+                MatrixException.SizesDontMatch();
 
-            var vec = GetColumnsVector(col)[row..Rows];
+        int thisRowsColumns, thisColumnsRows;
+
+        Func<int, double[]> getVector;
+        Action<int, int> swap;
+
+        Func<int, int, double> getValue, getUnitedValue;
+        Action<int, int, double> setValue, setUnitedValue;
+
+        if (isUpperTriangular)
+        {
+            thisColumnsRows = Columns;
+            thisRowsColumns = Rows;
+
+            getVector = GetColumnsVector;
+            swap = SwapRows;
+
+            getValue = (r, c) => Value[r, c];
+            getUnitedValue = (r, c) => united.Value[r, c];
+
+            setValue = (r, c, val) => Value[r, c] = val;
+            setUnitedValue = (r, c, val) => united.Value[r, c] = val;
+        }
+        else
+        {
+            thisColumnsRows = Rows;
+            thisRowsColumns = Columns;
+
+            getVector = GetRowsVector;
+            swap = SwapColumns;
+
+            getValue = (c, r) => Value[r, c];
+            getUnitedValue = (c, r) => united.Value[r, c];
+
+            setValue = (c, r, val) => Value[r, c] = val;
+            setUnitedValue = (c, r, val) => united.Value[r, c] = val;
+        }
+
+        int rowCol = 0;
+
+        for (int colRow = 0; colRow < thisColumnsRows; colRow++)
+        {
+            if (rowCol == thisRowsColumns - 1) break;
+
+            var vec = getVector(colRow)[rowCol..thisRowsColumns];
+
             var id = Std.GetIdByMinElem<double>(vec, true);
 
             if (id is null) continue;
 
-            if (row != row + id) SwapRows(row, row + id ?? 0);
+            if (rowCol != rowCol + id) swap(rowCol, rowCol + id ?? 0);
 
-            for (int r = row + 1; r < Rows; r++)
+            for (int rC = rowCol + 1; rC < thisRowsColumns; rC++)
             {
-                if (Value[r, col] == 0d) continue;
+                if (getValue(rC, colRow) == 0d) continue;
 
-                var k = Value[r, col] / Value[row, col];
+                var k = getValue(rC, colRow) / getValue(rowCol, colRow);
 
-                for (int c = col; c < Columns; c++) 
+                for (int cR = colRow; cR < thisColumnsRows; cR++) 
                 {
-                    Value[r, c] -= Value[row, c] * k;
+                    setValue(rC, cR, 
+                        getValue(rC, cR) - getValue(rowCol, cR) * k
+                    );
 
-                    if (united is not null) united.Value[r, c] -= united.Value[row, c] * k;
+                    if (united is not null) setUnitedValue(rC, cR, 
+                        getUnitedValue(rC, cR) - getUnitedValue(rowCol, cR) * k
+                    );
                 }
             }
             
-            row++;
+            rowCol++;
         }
 
         return this;
