@@ -113,7 +113,12 @@ public class Matrix
 
                 var k = Value[r, col] / Value[row, col];
 
-                for (int c = col; c < Columns; c++) Value[r, c] = Value[r, c] - Value[row, c] * k;
+                for (int c = col; c < Columns; c++) 
+                {
+                    Value[r, c] -= Value[row, c] * k;
+
+                    if (united is not null) united.Value[r, c] -= united.Value[row, c] * k;
+                }
             }
             
             row++;
