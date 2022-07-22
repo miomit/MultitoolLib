@@ -99,11 +99,13 @@ public class Matrix
         for (int col = 0; col < Columns; col++)
         {
             if (row == Rows - 1) break;
-            var id = Std.GetIdByMinElem<double>(GetColumnsVector(col)[row..Rows], true);
 
-            if (id is null) { row++; continue; }
+            var vec = GetColumnsVector(col)[row..Rows];
+            var id = Std.GetIdByMinElem<double>(vec, true);
 
-            if (row != id) SwapRows(row, id ?? 0);
+            if (id is null) continue;
+
+            if (row != row + id) SwapRows(row, row + id ?? 0);
 
             for (int r = row + 1; r < Rows; r++)
             {
