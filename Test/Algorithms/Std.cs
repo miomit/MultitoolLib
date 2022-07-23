@@ -28,5 +28,9 @@ public class StdTest
         double[] d = new double[] {0d, 0d, 0d, 0d};
 
         Assert.True(Std.GetIdByMinElem<double>(d, true) is null);
+
+        //TODO test exception
     }
+
+    //TODO test GetMinElem
 }
