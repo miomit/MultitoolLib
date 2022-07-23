@@ -31,4 +31,20 @@ public static class Std
     }
 
     public static T GetMinElem<T>(T[] arr) => arr[GetIdByMinElem<T>(arr) ?? 0];
+
+    public static double Nod(double a, double b)
+    {
+        if (b < 0) b = -b;
+        if (a < 0) a = -a;
+        
+        while (b > 0)
+        {
+            double temp = b;
+            b = a % b;
+            a = temp;
+        }
+
+        return a;
+    }
+    public static double Nok(double a, double b) => Math.Abs(a * b)/Nod(a, b);
 }
