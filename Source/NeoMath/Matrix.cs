@@ -155,14 +155,18 @@ public class Matrix
 
                 var k = getValue(rC, colRow) / getValue(rowCol, colRow);
 
+                var nok = Std.Nok(getValue(rC, colRow), getValue(rowCol, colRow));
+                var k1 = nok / getValue(rC, colRow);
+                var k2 = nok / getValue(rowCol, colRow);
+
                 for (int cR = colRow; cR < thisColumnsRows; cR++) 
                 {
                     setValue(rC, cR, 
-                        getValue(rC, cR) - getValue(rowCol, cR) * k
+                        getValue(rC, cR) * k1 - getValue(rowCol, cR) * k2
                     );
 
                     if (united is not null) setUnitedValue(rC, cR, 
-                        getUnitedValue(rC, cR) - getUnitedValue(rowCol, cR) * k
+                        getUnitedValue(rC, cR) * k1 - getUnitedValue(rowCol, cR) * k2
                     );
                 }
             }
