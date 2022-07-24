@@ -10,7 +10,7 @@ public class Matrix
 
     public double[] GetRowsVector(int row)
     {
-        if (row >= Rows || row < 0) MatrixException.LineDoesNotExist();
+        if (row >= Rows || row < 0) Interrupts.Matrix.LineDoesNotExist();
 
         double[] res = new double[Columns];
         for (int i = 0; i < Columns; i++) res[i] = Value[row, i];
@@ -19,7 +19,7 @@ public class Matrix
 
     public double[] GetColumnsVector(int col)
     {
-        if (col >= Columns || col < 0) MatrixException.LineDoesNotExist(false);
+        if (col >= Columns || col < 0) Interrupts.Matrix.LineDoesNotExist(false);
         double[] res = new double[Rows];
         for (int i = 0; i < Rows; i++) res[i] = Value[i, col];
         return res;
@@ -27,14 +27,14 @@ public class Matrix
 
     public void SetRowsVector(int row, double[] rowsVector) 
     {
-        if (row >= Rows || row < 0) MatrixException.LineDoesNotExist();
+        if (row >= Rows || row < 0) Interrupts.Matrix.LineDoesNotExist();
 
         for (int i = 0; i < Columns; i++) Value[row, i] = rowsVector[i];
     }
 
     public void SetColumnsVector(int col, double[] columnsVector) 
     {
-        if (col >= Columns || col < 0) MatrixException.LineDoesNotExist(false);
+        if (col >= Columns || col < 0) Interrupts.Matrix.LineDoesNotExist(false);
         
         for (int i = 0; i < Rows; i++) Value[i, col] = columnsVector[i];
     }
@@ -61,7 +61,7 @@ public class Matrix
        {
             string[] vec = new string[Columns];
             vec = Console.ReadLine().Split(' ', System.StringSplitOptions.RemoveEmptyEntries);
-            if (vec.Length != Columns) MatrixException.InputSize();
+            if (vec.Length != Columns) Interrupts.Matrix.InputSize();
             for (int col = 0; col < Columns; col++)
             {
                 Value[row, col] = Convert.ToDouble(vec[col]);
@@ -96,7 +96,7 @@ public class Matrix
     {
         if (united is not null) 
             if (united.Rows != Rows && united.Columns != Columns) 
-                MatrixException.SizesDontMatch();
+                Interrupts.Matrix.SizesDontMatch();
 
         int thisRowsColumns, thisColumnsRows;
 
@@ -179,7 +179,7 @@ public class Matrix
 
     public double Det()
     {
-        if (Rows != Columns) MatrixException.NotSquare();
+        if (Rows != Columns) Interrupts.Matrix.NotSquare();
 
         double res = 1;
 
@@ -231,7 +231,7 @@ public class Matrix
 
     public static Matrix operator *(Matrix a, Matrix b)
     {
-        if (a.Columns != b.Rows) MatrixException.CannotMul();
+        if (a.Columns != b.Rows) Interrupts.Matrix.CannotMul();
         
         Matrix c = new Matrix(a.Rows, b.Columns);
 
@@ -262,7 +262,7 @@ public class Matrix
 
     private static Matrix OprWithMat (Matrix a, Matrix b, Func<double, double, double> func)
     {
-        if (a.Rows != b.Rows || a.Columns != b.Columns) MatrixException.SizesDontMatch();
+        if (a.Rows != b.Rows || a.Columns != b.Columns) Interrupts.Matrix.SizesDontMatch();
 
         Matrix c = new Matrix(a.Rows, a.Columns);
         for (int row = 0; row < c.Rows; row++)
@@ -277,7 +277,7 @@ public class Matrix
 
     private static bool BoolOprWithMat (Matrix a, Matrix b, Func<double, double, bool> func)
     {
-        if (a.Rows != b.Rows || a.Columns != b.Columns) MatrixException.SizesDontMatch();
+        if (a.Rows != b.Rows || a.Columns != b.Columns) Interrupts.Matrix.SizesDontMatch();
 
         for (int row = 0; row < a.Rows; row++)
         {
