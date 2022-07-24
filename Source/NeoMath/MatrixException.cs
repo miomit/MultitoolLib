@@ -9,4 +9,6 @@ internal static class MatrixException
     public static void CannotMul() => throw new Exception("Matrices cannot be multiplied.");
 
     public static void InputSize() => throw new Exception("The entered size does not correspond to reality.");
+
+    public static void NotSquare() => throw new Exception("The matrix must be square.");
 }
