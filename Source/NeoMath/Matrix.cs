@@ -177,6 +177,18 @@ public class Matrix
         return this;
     }
 
+    public double Det()
+    {
+        if (Rows != Columns) MatrixException.NotSquare();
+
+        double res = 1;
+
+        for (int rowCol = 0; rowCol < Rows; rowCol++)
+            res *= Value[rowCol, rowCol];
+
+        return res;
+    }
+
     public override string ToString()
     {
         string res = "";
