@@ -257,6 +257,63 @@ public class MatrixTest
     }
 
     [Fact]
+    public void TestDet()
+    {
+        Matrix a = new Matrix(new double[,] {{-1, 5},
+                                             {0, -2}});
+
+        int resA = 2;
+        Assert.True(a.Det() == resA);
+
+        Matrix b = new Matrix(new double[,] {{2, 4},
+                                             {-3, 6}});
+
+        int resB = 24;
+        Assert.True(b.Det() == resB);
+
+        Matrix c = new Matrix(new double[,] {{1, 0, 3},
+                                             {0, 1, 3},
+                                             {2, 1, -4}});
+
+        int resC = -13;
+        Assert.True(c.Det() == resC);
+
+        Matrix d = new Matrix(new double[,] {{2, -2, 3},
+                                             {3, 4, 5},
+                                             {2, 1, -4}});
+
+        int resD = -101;
+        Assert.True(d.Det() == resD);
+
+        Matrix e = new Matrix(new double[,] {{2, 1, 1, 3},
+                                             {1, 2, 3, 2},
+                                             {0, 5, 7, 0},
+                                             {1, 1, -2, 1}});
+
+        int resE = -14;
+        Assert.True(e.Det() == resE);
+
+        Matrix f = new Matrix(new double[,] {{3, -1, 2, 3},
+                                             {1, -2, 3, 1},
+                                             {1, 3, 3, 2},
+                                             {1, -1, -2, 0}});
+
+        int resF = 17;
+        Assert.True(f.Det() == resF);
+
+        Matrix matException = new Matrix(new double[,] {{2, 1, 2, 3}, 
+                                                        {1, 5, 3, 9}, 
+                                                        {3, 1, 0, 0}});
+
+        Assert.Throws<Exception>(() => matException.Det());
+
+        Matrix matNum = new Matrix(new double[,] {{1}});
+
+        int resMatNum = 1;
+        Assert.True(matNum.Det() == resMatNum);
+    }
+    
+    [Fact]
     public void EqualsMatrix()
     {
         Matrix a = new Matrix(new double[,] {{2, 1, 2, 3}, 
