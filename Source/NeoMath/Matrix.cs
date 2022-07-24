@@ -183,8 +183,12 @@ public class Matrix
 
         double res = 1;
 
+        Matrix matrixStep = new(Value);
+
+        matrixStep.Step();
+
         for (int rowCol = 0; rowCol < Rows; rowCol++)
-            res *= Value[rowCol, rowCol];
+            res *= matrixStep.Value[rowCol, rowCol];
 
         return res;
     }
