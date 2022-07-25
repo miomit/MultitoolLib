@@ -260,7 +260,7 @@ public class MatrixTest
 
         Matrix d = new Matrix(new double[,] {{1}});
 
-        Assert.Throws<Exception>(() => c.SwapColumns(0, 1));
+        Assert.Throws<Exception>(() => d.SwapColumns(0, 1));
     }
 
     [Fact]
