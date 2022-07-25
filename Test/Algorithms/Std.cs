@@ -33,7 +33,23 @@ public class StdTest
         Assert.True(Std.GetIdByMinElem<double>(e) is null);
     }
 
-    //TODO test GetMinElem
+    [Fact]
+    public void GetMinElem()
+    {
+        double[] a = new double[] {1.23d, 10.00d, 0.12131d, 0d, 0d, 5d};
+        double resA = 0;
+
+        Assert.True(Std.GetMinElem<double>(a) == resA);
+
+        double[] b = new double[] {-1d, 10.00d, 0.12131d, -0d, 0d, -5d};
+        double resB = -5;
+
+        Assert.True(Std.GetIdByMinElem<double>(b) == resB);
+
+        double[] c = new double[] {};
+
+        Assert.True(Std.GetIdByMinElem<double>(c) is null);
+    }
 
     [Fact]
     public void Nod()
