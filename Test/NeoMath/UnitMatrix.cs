@@ -253,7 +253,14 @@ public class MatrixTest
 
         Assert.True(b == resB);
 
-        //TODO add an exception check
+        Matrix c = new Matrix(new double[,] {{12, -30, -17},
+                                             {4, -36, 29}});
+
+        Assert.Throws<Exception>(() => c.SwapColumns(1, -2));
+
+        Matrix d = new Matrix(new double[,] {{1}});
+
+        Assert.Throws<Exception>(() => c.SwapColumns(0, 1));
     }
 
     [Fact]
