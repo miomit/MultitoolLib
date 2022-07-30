@@ -30,7 +30,14 @@ public static class Std
         return id;
     }
 
-    public static T GetMinElem<T>(T[] arr) => arr[GetIdByMinElem<T>(arr) ?? 0];
+    public static T GetMinElem<T>(T[] arr)
+    {
+        int? id = GetIdByMinElem<T>(arr);
+
+        if (id is null) Interrupts.Std.EmptyArray();
+
+        return arr[id ?? 0];
+    }
 
     public static double Nod(double a, double b)
     {
