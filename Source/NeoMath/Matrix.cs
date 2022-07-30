@@ -84,11 +84,13 @@ public class Matrix
 
     public void SwapRows(int rowA, int rowB)
     {
+        if (rowA < 0 || rowA >= Rows || rowB < 0 || rowB >= Rows) Interrupts.Matrix.LineDoesNotExist();
         for (int col = 0; col < Columns; col++) Algorithms.Std.Swap<double>(ref Value[rowA, col], ref Value[rowB, col]);
     }
 
     public void SwapColumns(int colA, int colB)
     {
+        if (colA < 0 || colA >= Columns || colB < 0 || colB >= Columns) Interrupts.Matrix.LineDoesNotExist(false);
         for (int row = 0; row < Rows; row++) Algorithms.Std.Swap<double>(ref Value[row, colA], ref Value[row, colB]);
     }
 
