@@ -44,11 +44,11 @@ public class StdTest
         double[] b = new double[] {-1d, 10.00d, 0.12131d, -0d, 0d, -5d};
         double resB = -5;
 
-        Assert.True(Std.GetIdByMinElem<double>(b) == resB);
+        Assert.True(Std.GetMinElem<double>(b) == resB);
 
         double[] c = new double[] {};
 
-        Assert.True(Std.GetIdByMinElem<double>(c) is null);
+        Assert.Throws<Exception>(() => Std.GetMinElem<double>(c));
     }
 
     [Fact]
