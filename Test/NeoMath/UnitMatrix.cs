@@ -226,6 +226,15 @@ public class MatrixTest
         b.SwapRows(1, 2);
 
         Assert.True(b == resB);
+
+        Matrix c = new Matrix(new double[,] {{12, -30, -17},
+                                             {4, -36, 29}});
+
+        Assert.Throws<Exception>(() => c.SwapRows(1, -2));
+
+        Matrix d = new Matrix(new double[,] {{1}});
+
+        Assert.Throws<Exception>(() => d.SwapRows(0, 1));
     }
 
     [Fact]
