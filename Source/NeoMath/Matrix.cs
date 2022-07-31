@@ -96,6 +96,15 @@ public class Matrix
 
     public Matrix Step(bool isUpperTriangular = true, Matrix united = null)
     {
+        Step(isUpperTriangular: isUpperTriangular,
+                        united: null,
+                         isNok: true);
+
+        return this;
+    }
+
+    private bool Step(bool isUpperTriangular, Matrix united, bool isAbs = false, bool isNok = false)
+    {
         if (united is not null) 
             if (united.Rows != Rows && united.Columns != Columns) 
                 Interrupts.Matrix.SizesDontMatch();
@@ -107,6 +116,8 @@ public class Matrix
 
         Func<int, int, double> getValue, getUnitedValue;
         Action<int, int, double> setValue, setUnitedValue;
+
+        bool isSub = false;
 
         if (isUpperTriangular)
         {
@@ -145,11 +156,11 @@ public class Matrix
 
             var vec = getVector(colRow)[rowCol..thisRowsColumns];
 
-            var id = Std.GetIdByMinElem<double>(vec, true);
+            var id = Std.GetIdByMinElem<double>(vec, true, isAbs);
 
             if (id is null) continue;
 
-            if (rowCol != rowCol + id) swap(rowCol, rowCol + id ?? 0);
+            if (rowCol != rowCol + id) { swap(rowCol, rowCol + id ?? 0); isSub = !isSub; }
 
             for (int rC = rowCol + 1; rC < thisRowsColumns; rC++)
             {
@@ -163,31 +174,44 @@ public class Matrix
 
                 for (int cR = colRow; cR < thisColumnsRows; cR++) 
                 {
-                    setValue(rC, cR, 
-                        getValue(rC, cR) * k1 - getValue(rowCol, cR) * k2
-                    );
+                    if (isNok)
+                    {
+                        setValue(rC, cR, 
+                            getValue(rC, cR) * k1 - getValue(rowCol, cR) * k2
+                        );
 
-                    if (united is not null) setUnitedValue(rC, cR, 
-                        getUnitedValue(rC, cR) * k1 - getUnitedValue(rowCol, cR) * k2
-                    );
+                        if (united is not null) setUnitedValue(rC, cR, 
+                            getUnitedValue(rC, cR) * k1 - getUnitedValue(rowCol, cR) * k2
+                        );
+                    }
+                    else
+                    {
+                        setValue(rC, cR, 
+                            getValue(rC, cR) - getValue(rowCol, cR) * k
+                        );
+
+                        if (united is not null) setUnitedValue(rC, cR, 
+                            getUnitedValue(rC, cR) - getUnitedValue(rowCol, cR) * k
+                        );
+                    }
                 }
             }
             
             rowCol++;
         }
 
-        return this;
+        return isSub;
     }
 
     public double Det()
     {
         if (Rows != Columns) Interrupts.Matrix.NotSquare();
 
-        double res = 1;
-
         Matrix matrixStep = new(Value);
 
-        matrixStep.Step();
+        double res = matrixStep.Step(isUpperTriangular: true,
+                                                united: null,
+                                                 isAbs: true) ? -1 : 1;
 
         for (int rowCol = 0; rowCol < Rows; rowCol++)
             res *= matrixStep.Value[rowCol, rowCol];
