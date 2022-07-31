@@ -17,8 +17,3 @@ dotnet build
 cd Test
 dotnet test
 ```
-
-## Run
-```
-dotnet run
-```
