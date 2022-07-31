@@ -9,7 +9,7 @@ public static class Std
         b = c;
     }
 
-    public static int? GetIdByMinElem<T>(T[] arr, bool skipZero = false)
+    public static int? GetIdByMinElem<T>(T[] arr, bool skipZero = false, bool isAbs = false)
     {
         //Todo Exception arr == null
         int? id = null;
@@ -24,7 +24,10 @@ public static class Std
 
             if (id is null) { id = skipZeroFunc(null, i); continue; }
 
-            if (arrValue < Convert.ToDouble(arr[id ?? 0])) id = skipZeroFunc(id, i); //Todo Exception id is null :D
+            bool isMin = isAbs  ? Math.Abs(arrValue) < Math.Abs(Convert.ToDouble(arr[id ?? 0]))
+                                : arrValue < Convert.ToDouble(arr[id ?? 0]);
+
+            if (isMin) id = skipZeroFunc(id, i); //Todo Exception id is null :D
         }
 
         return id;
