@@ -31,6 +31,11 @@ public class StdTest
 
         double[] e = new double[] {};
         Assert.True(Std.GetIdByMinElem<double>(e) is null);
+
+        double[] f = new double[] {1.23d, -1, 2, -8};
+        int resF = 1;
+
+        Assert.True(Std.GetIdByMinElem<double>(f, isAbs: true) == resF);
     }
 
     [Fact]
