@@ -285,21 +285,21 @@ public class MatrixTest
                                              {-3, 6}});
 
         int resB = 24;
-        Assert.True(b.Det() == resB);
+        Assert.True(b.Det() > resB - 1 && b.Det() < resB + 1);
 
         Matrix c = new Matrix(new double[,] {{1, 0, 3},
                                              {0, 1, 3},
                                              {2, 1, -4}});
 
         int resC = -13;
-        Assert.True(c.Det() == resC);
+        Assert.True(c.Det() > resC - 1 && c.Det() < resC + 1);
 
         Matrix d = new Matrix(new double[,] {{2, -2, 3},
                                              {3, 4, 5},
                                              {2, 1, -4}});
 
         int resD = -101;
-        Assert.True(d.Det() == resD);
+        Assert.True(d.Det() > resD - 1 && d.Det() < resD + 1);
 
         Matrix e = new Matrix(new double[,] {{2, 1, 1, 3},
                                              {1, 2, 3, 2},
@@ -307,7 +307,7 @@ public class MatrixTest
                                              {1, 1, -2, 1}});
 
         int resE = -14;
-        Assert.True(e.Det() == resE);
+        Assert.True(e.Det() > resE - 1 && e.Det() < resE + 1);
 
         Matrix f = new Matrix(new double[,] {{3, -1, 2, 3},
                                              {1, -2, 3, 1},
@@ -315,7 +315,7 @@ public class MatrixTest
                                              {1, -1, -2, 0}});
 
         int resF = 17;
-        Assert.True(f.Det() == resF);
+        Assert.True(f.Det() > resF - 1 && f.Det() < resF + 1);
 
         Matrix matException = new Matrix(new double[,] {{2, 1, 2, 3}, 
                                                         {1, 5, 3, 9}, 
