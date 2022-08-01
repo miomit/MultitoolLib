@@ -9,6 +9,7 @@ cd MultitoolLib
 
 ## Build
 ```
+cd Source
 dotnet build
 ```
 
