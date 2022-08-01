@@ -11,7 +11,7 @@ public abstract class VLCMedia
 
     public VLCMedia(string url, bool isVideo = false){
         using var libVLC = new LibVLC(enableDebugLogs: true);
-        _Media = new Media(libVLC, new Uri(url));
+        _Media = new Media(libVLC, new Uri(Path.GetFullPath(url)));
         if (!isVideo) _Media.AddOption(":no-video");
         _MediaPlayer = new MediaPlayer(_Media);
     }
