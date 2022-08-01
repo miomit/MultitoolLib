@@ -7,6 +7,8 @@ public abstract class VLCMedia
     private MediaPlayer _MediaPlayer;
     private Media _Media;
 
+    public bool IsPlaying => _MediaPlayer.IsPlaying;
+
     public VLCMedia(string url, bool isVideo = false){
         using var libVLC = new LibVLC(enableDebugLogs: true);
         _Media = new Media(libVLC, new Uri(url));
