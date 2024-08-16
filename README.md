@@ -3,7 +3,7 @@
 <img src="Assets/MultiToolLibLogo.png">
 
 ```
-git clone https://github.com/yuraMovsesyan/MultitoolLib.git
+git clone ./MultitoolLib.git
 cd MultitoolLib
 ```
 
